@@ -1,0 +1,13 @@
+<h2>Add rate comparison</h2>
+
+<%= form_for :rate_comparison, url: {controller: 'currency', action: 'add_rate_comparison'} do |f| %>
+  <%= f.collection_select :currency_one, Currency.all, :id, :iso_code %>
+  <%= f.collection_select :currency_two, Currency.all, :id, :iso_code %>
+  <%= f.submit id: 'add_rate_comparison',value: '+' %>
+<% end %>
+
+<%= render 'list_comparisons' %>
+
+<br></br>
+
+<%= link_to 'List rate comparisons', controller: 'currency', action: :index %>

@@ -1,0 +1,20 @@
+<b> Rates last updated <%= time_ago_in_words(Currency.first.updated_at) %> ago. </b>
+<table>
+  <tr>
+    <td>Currency 1</td>
+    <td>Currency 2</td>
+    <td>Rate</td>
+  </tr>
+  <% RateComparison.all.each do |r| %>
+    <tr>
+      <td><%= r.currency_one.iso_code %></td>
+      <td><%= r.currency_two.iso_code %></td>
+      <td><%= r.exchange_rate %></td>
+      <% if action_name == 'manage_rate_comparisons' %>
+      <td>
+        <%= link_to 'Remove', {controller: 'currency', action: :remove_rate_comparison, rate_comparison_id: r.id}, :id => 'remove_rate_comparison_' + r.id.to_s %>
+      </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
