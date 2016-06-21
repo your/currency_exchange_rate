@@ -7,7 +7,7 @@ RSpec.describe Currency, type: :model do
   end
 
   it { is_expected.to validate_presence_of(:iso_code) }
-  
+
   it { is_expected.to validate_presence_of(:rate) }
 
   it 'updates the rates sucessfully' do
