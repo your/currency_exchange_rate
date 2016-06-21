@@ -9,6 +9,8 @@ RSpec.describe RateComparison, type: :model do
   it { is_expected.to belong_to(:currency_one).class_name('Currency') }
   it { is_expected.to belong_to(:currency_two).class_name('Currency') }
 
+  it { is_expected.to have_many :trades }
+
   [:currency_one, :currency_two].each do |att|
     it { is_expected.to validate_presence_of(att) }
   end

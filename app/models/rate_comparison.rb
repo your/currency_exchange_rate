@@ -2,6 +2,7 @@ class RateComparison < ActiveRecord::Base
 
   belongs_to :currency_one, class_name: 'Currency'
   belongs_to :currency_two, class_name: 'Currency'
+  has_many :trades
 
   validates_presence_of :currency_one, :currency_two
 

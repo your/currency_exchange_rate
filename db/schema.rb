@@ -31,4 +31,16 @@ ActiveRecord::Schema.define(version: 20160620153717) do
     t.integer "currency_two_id"
   end
 
+  create_table "trades", force: :cascade do |t|
+    t.string   "direction"
+    t.integer  "rate_comparison_id"
+    t.float    "enter_rate"
+    t.float    "exit_rate"
+    t.float    "interest_rate"
+    t.float    "interest_value"
+    t.datetime "closed_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
 end
