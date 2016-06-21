@@ -1,7 +1,7 @@
 #Fetch complete list of updated currency/rates
 Currency.update_rates
 
-Create random rates comparisons
+# Create random rates comparisons
 10.times do |i|
 
   #Preventing duplicates
