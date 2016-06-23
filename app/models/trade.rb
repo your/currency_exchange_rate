@@ -20,12 +20,12 @@ class Trade < ActiveRecord::Base
   before_create :_take_funds!
 
   def close!
-    Balance.create!(amount: Balance.last.amount + _current_interest_value)
+    Balance.create!(amount: Balance.last.amount + current_interest_value)
     update_columns(closed_at: DateTime.current, updated_at: DateTime.current)
   end
 
   def update_current_interest_value!
-    update_columns(interest_value: _current_interest_value, updated_at: DateTime.current)
+    update_columns(interest_value: current_interest_value, updated_at: DateTime.current)
   end
 
   def positive?
@@ -48,14 +48,14 @@ class Trade < ActiveRecord::Base
     gain? ? :gain : :loss
   end
 
+  def current_interest_value
+    _direction_sign * _absolute_interest_value * _absolute_rate_diff
+  end
+
   private
 
     def _take_funds!
       Balance.create!(amount: Balance.last.amount - 100)
-    end
-
-    def _current_interest_value
-      _direction_sign * _absolute_interest_value * _absolute_rate_diff
     end
 
     def _absolute_rate_diff
@@ -71,7 +71,7 @@ class Trade < ActiveRecord::Base
     end
 
     def _is_balance_enough?
-      Balance.last.try(:amount).to_i - 100 > 0
+      Balance.last.try(:amount).to_i - 100 >= 0
     end
 
     def _direction_sign
